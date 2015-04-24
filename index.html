@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sticky Navigation using W3C technologies</title>
+	<meta name="description" content="Demonstration of how powerfull and beautiful web tehnologies are. Flexbox, HTML5, Semantic Markup, Grid Layout, JavaScript, DOM.">
+
+	<style>
+		:root {
+			overflow-y: scroll;
+			font: bold 16px/1.5 monospace;
+			--var-bgColor: #faf0ff; /* CSS Variables FTW, only works in FF30+ */
+			--var-bgNav: #faf178;
+			scroll-behavior: smooth; // Only FF now, Chrome implementing 
+		}	
+		body {
+			margin: 0; /* Remove Default margin of 8px across browsers */
+		}
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+		}
+		a {
+			text-decoration: none;
+			color: #7a8fff;
+		}
+		header[role="banner"] {
+			padding: 1rem;
+			text-align: center;
+			background-color: #faf0ff;
+			background-color: var(--var-bgColor);
+		}
+		nav[role="navigation"] {
+			z-index: 1;
+			position: sticky;
+			top: 0;
+		}
+		nav[role="navigation"].fixed {
+			z-index: 1;
+			position: fixed;
+			top: 0;
+			right: 0;
+			left: 0;
+		}
+		nav[role="navigation"] > ul {
+			display: flex;
+			flex-flow: row wrap;
+			background-color: #faf178;
+			background-color: var(--var-bgNav);
+		}
+		nav[role="navigation"] > ul > li {
+			flex: auto;
+			text-align: center;
+		}
+		nav[role="navigation"] > ul > li > a {
+			display: block;
+			padding: 0.625rem;
+		}
+		main[role="main"] {
+			text-align: center;
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+		}
+		main[role="main"] > section {
+			height: 100vh;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		main[role="main"] > section > h1 {
+			font-size: 3rem;
+		}
+		#section-one {
+			background-color: pink;
+			mix-blend-mode: difference;
+		}
+		#section-two {
+			background-color: gold;
+			mix-blend-mode: difference;
+		}
+		#section-three {
+			background-color: skyblue;
+			mix-blend-mode: difference;
+		}
+		#section-four {
+			background-color: purple;
+			mix-blend-mode: difference;
+		}
+		#section-five {
+			background-color: olive;
+			mix-blend-mode: difference;
+		}
+		footer[role="contentinfo"] {
+			text-align: center;
+			padding: 1rem;
+			color: whitesmoke;
+			background-color: #090525;
+		}
+	</style>
+</head>
+<body>
+
+	<header role="banner">
+		<h1 role="heading">Sticky Navigation Demo</h1>
+		<p class="tagline">Very clean and simple implementation of Sticky Navigation.</p>
+	</header>
+
+	<nav role="navigation">
+		<ul>
+			<li><a href="#section-one">Section#1</a></li>
+			<li><a href="#section-two">Section#2</a></li>
+			<li><a href="#section-three">Section#3</a></li>
+			<li><a href="#section-four">Section#4</a></li>
+			<li><a href="#section-five">Section#5</a></li>
+		</ul>
+	</nav>
+
+	<main role="main">
+		<section id="section-one">
+			<h1>I</h1>
+		</section>
+		<section id="section-two">
+			<h1>love</h1>
+		</section>
+		<section id="section-three">
+			<h1>Web</h1>
+		</section>
+		<section id="section-four">
+			<h1>Standards</h1>
+		</section>
+		<section id="section-five">
+			<h1>❤</h1>
+		</section>
+	</main>
+
+	<footer role="contentinfo">
+		<small>❤ Handcrafted with love ❤</small>
+	</footer>
+
+
+	<script>
+
+		;(function IIFE(){
+			'use strict';
+			let isFirefox = typeof InstallTrigger !== 'undefined'; // Sneaky user agent sniffing :P
+			if(!isFirefox) {
+			let nav = document.querySelector('nav[role="navigation"]');
+				let offsetY = nav.offsetTop;
+				document.addEventListener('scroll', function(e) {
+  			window.scrollY >= offsetY ? nav.classList.add('fixed') :
+                                    nav.classList.remove('fixed');
+				});
+			}
+
+		}());
+
+	</script>
+
+</body>
+</html>
